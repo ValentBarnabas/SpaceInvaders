@@ -31,6 +31,7 @@ class GameView : SurfaceView {
                 var gameController = GameController(rendering)
                 Game.setGameController(gameController)
                 Game.setRunning(true)
+                Game.unpauseGame()
             }
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {

@@ -6,7 +6,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import kotlin.random.Random
 
-class Background (private val context: Context) {
+class Background (private val context: Context) : IDrawable {
 
     private var width : Int = 0
     private var height : Int = 0
@@ -18,7 +18,7 @@ class Background (private val context: Context) {
         this.height = height
     }
 
-    fun draw(canvas : Canvas) {
+    override fun Draw(canvas : Canvas) {
 
         randomlyAddStar(16)
 

@@ -1,33 +1,24 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-import android.graphics.Canvas
+class Player {
 
-class Player : SpaceObject() {
+    public var playerShip : PlayerShip = PlayerShip()
 
     private var alive : Boolean = false
-    private var vel: Float = 0.0f
+    private var score : Int = 0
+    private var name : String = ""
 
     init {
         alive = true
     }
 
-    override fun CollidedWith(so: SpaceObject) {
-        TODO("Not yet implemented")
-    }
-
-    override fun Step() {
-        //TODO("Not yet implemented")
-    }
-
-    override fun Draw(canvas : Canvas) {
-        TODO("Not yet implemented")
-    }
-
     fun isAlive(): Boolean {
         return alive
     }
-
-    fun setVel(vel : Float) {
-        this.vel = vel
+    fun getScore() : Int {
+        return score;
+    }
+    fun setScore(amount : Int) {
+        score += amount
     }
 }

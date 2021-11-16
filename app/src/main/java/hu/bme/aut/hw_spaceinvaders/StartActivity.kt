@@ -20,6 +20,4 @@ class StartActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
 }
