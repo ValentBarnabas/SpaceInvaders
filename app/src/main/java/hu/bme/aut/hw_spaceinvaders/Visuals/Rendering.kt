@@ -33,10 +33,8 @@ class Rendering (
             synchronized(view.holder) {
                 background.Draw(canvas)
                 for (so in Game.getSpaceObjectList()) {
-                    //TODO: draw spaceObjects
                     drawSpaceObject(canvas, so)
                 }
-                //TODO: draw player
                 drawPlayer(canvas, Game.getPlayer())
             }
         } finally {

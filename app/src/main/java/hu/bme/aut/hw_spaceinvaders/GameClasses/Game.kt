@@ -71,8 +71,17 @@ object Game {
 
     fun setup() {
         player = Player()
+        //TODO: remove magic numbers
         player.playerShip.setX((width/2-86/2).toFloat())    //width/2 for centering, 86/2 because of sprite scaling and sprite equating to middle
         player.playerShip.setY((height-86-8).toFloat())     //-86 because of scaling of sprite, -8 to have a little elevation
+    }
+
+    fun addShot() {
+        var tempBullet = Bullet()
+        tempBullet.setX(player.playerShip.getX())
+        tempBullet.setY(player.playerShip.getY())
+        tempBullet.setVel(10)
+        addSpaceObj(tempBullet)
     }
 
     fun getSpaceObjectList() : MutableList<SpaceObject> {

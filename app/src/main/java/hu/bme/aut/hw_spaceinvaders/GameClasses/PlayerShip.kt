@@ -13,6 +13,7 @@ class PlayerShip() : SpaceObject() {
 
     override fun Step() {
 //        TODO("Not yet implemented")
+        this.setX(this.getX()+vel)
     }
 
     override fun Draw(canvas : Canvas) {

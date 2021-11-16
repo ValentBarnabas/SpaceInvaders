@@ -5,6 +5,7 @@ import android.graphics.Canvas
 class Bullet() : SpaceObject() {
 
     override val imgIdx: Int = 1
+    private var vel: Int = 0
 
     override fun CollidedWith(so: SpaceObject) {
         TODO("Not yet implemented")
@@ -12,6 +13,7 @@ class Bullet() : SpaceObject() {
 
     override fun Step() {
 //        TODO("Not yet implemented")
+        this.setY(this.getY()-vel)
     }
 
     override fun Draw(canvas: Canvas) {
@@ -20,5 +22,9 @@ class Bullet() : SpaceObject() {
 
     override fun HeightTooMuch(game : Game) {
         game.changeScore(-2)
+    }
+
+    fun setVel(vel : Int) {
+        this.vel = vel
     }
 }

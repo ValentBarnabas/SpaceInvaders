@@ -4,13 +4,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game
+import hu.bme.aut.hw_spaceinvaders.Senzor.GyroscopeHelper
 
 //TODO: implement back button not quitting app, but instead pausing game, and opening popup window. Also, instead of quitting the app, go back to StartActivity
 
 class GameActivity : AppCompatActivity() {
+
+    private lateinit var gyroscopeHelper: GyroscopeHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        gyroscopeHelper = GyroscopeHelper(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        gyroscopeHelper.start()
+    }
+
+    override fun onPause() {
+        gyroscopeHelper.stop()
+        super.onPause()
     }
 
     override fun onBackPressed() {
@@ -24,6 +39,8 @@ class GameActivity : AppCompatActivity() {
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(Game.getRunning() && Game.getPaused()) {
             Game.unpauseGame()
+        } else if (Game.getRunning() && !Game.getPaused()) {
+            Game.addShot()
         }
         return super.onTouchEvent(event)
     }
