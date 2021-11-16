@@ -22,7 +22,7 @@ class Rendering (
         try {
             canvas = view.holder.lockCanvas()
             synchronized(view.holder) {
-                background.draw()
+                background.draw(canvas)
                 for (entity in Game.getEntityList()) {
                     //TODO: draw entities
                 }

@@ -11,7 +11,8 @@
         <activity
             android:name=".StartActivity"
             android:exported="true"
-            android:theme="@style/Theme.GameInactive">
+            android:theme="@style/Theme.GameInactive"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +23,8 @@
         <activity
             android:name=".GameActivity"
             android:exported="true"
-            android:theme="@style/Theme.GameActive">
+            android:theme="@style/Theme.GameActive"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

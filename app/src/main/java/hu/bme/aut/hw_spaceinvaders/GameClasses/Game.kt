@@ -1,6 +1,5 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-import android.content.Context
 import hu.bme.aut.hw_spaceinvaders.GameLogic.GameController
 import java.util.*
 
@@ -10,7 +9,7 @@ object Game {
     private var width : Int = 0
 
     private val random = Random()
-    private var entities = mutableListOf<Entity>()
+    private var entities = mutableListOf<SpaceObject>()
     private var player : Player = Player()
 
     private lateinit var gameController : GameController
@@ -23,6 +22,7 @@ object Game {
             player.Step()
             for (entity in entities) {
                 entity.Step()
+                //TODO: check if entity is out of bound, if so, put them back or destroy them
             }
 
             enemyControl()
@@ -47,7 +47,7 @@ object Game {
         this.width = width
     }
 
-    fun getEntityList() : MutableList<Entity> {
+    fun getEntityList() : MutableList<SpaceObject> {
         return entities
     }
     fun getPlayer() : Player {

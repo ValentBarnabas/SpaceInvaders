@@ -1,21 +1,15 @@
 package hu.bme.aut.hw_spaceinvaders.Visuals
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Rect
+import kotlin.random.Random
 
-class Background (context: Context) {
+class Background (private val context: Context) {
 
     private var width : Int = 0
     private var height : Int = 0
-
-    companion object Star {
-        private var posX : Int = 0
-        private var posY : Int = 0
-        private var size : Int = 0
-
-        fun draw() {
-
-        }
-    }
 
     private var starList = mutableListOf<Star>()
 
@@ -24,11 +18,27 @@ class Background (context: Context) {
         this.height = height
     }
 
-    fun draw() {
-        //TODO: draw background and stars on it
-        //TODO: draw rectangle
-        for (star in starList) {
-            star.draw()
+    fun draw(canvas : Canvas) {
+
+        randomlyAddStar(16)
+
+        val bgRect = Rect(0,0, width, height)
+        var bgColor = Paint()
+        bgColor.setARGB(255,0,255,0)
+        canvas.drawRect(bgRect, bgColor)
+
+        for(i in starList.size-1 downTo 0) {
+            var star = starList[i]
+            star.Draw(canvas)
+            star.Step()
+            if(star.posY > height) starList.removeAt(i)
+        }
+    }
+
+    fun randomlyAddStar(randLimit : Int) {
+        if(Random.nextInt(0, randLimit) % randLimit == 0) {
+            var tmp = Star(Random.nextInt(0, width))
+            starList.add(tmp)
         }
     }
 }
