@@ -39,8 +39,8 @@ class GameActivity : AppCompatActivity() {
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(Game.getRunning() && Game.getPaused()) {
             Game.unpauseGame()
-        } else if (Game.getRunning() && !Game.getPaused()) {
-            Game.addShot()
+        } else if (Game.getRunning() && !Game.getPaused() && event?.action == MotionEvent.ACTION_DOWN) {
+            Game.playerShooting()
         }
         return super.onTouchEvent(event)
     }

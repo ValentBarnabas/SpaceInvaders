@@ -21,4 +21,8 @@ class Player {
     fun setScore(amount : Int) {
         score += amount
     }
+
+    fun setShooting(isShooting: Boolean) {
+        playerShip.setShooting(true)
+    }
 }

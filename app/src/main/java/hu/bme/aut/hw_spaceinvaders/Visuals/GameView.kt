@@ -41,9 +41,4 @@ class GameView : SurfaceView {
             }
         })
     }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        //TODO: implement shooting
-        return super.onTouchEvent(event)
-    }
 }

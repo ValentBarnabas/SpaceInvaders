@@ -76,10 +76,14 @@ object Game {
         player.playerShip.setY((height-86-8).toFloat())     //-86 because of scaling of sprite, -8 to have a little elevation
     }
 
-    fun addShot() {
+    fun playerShooting() {
+        player.setShooting(true)
+    }
+
+    fun addShot(x: Float, y: Float) {
         var tempBullet = Bullet()
-        tempBullet.setX(player.playerShip.getX())
-        tempBullet.setY(player.playerShip.getY())
+        tempBullet.setX(x)
+        tempBullet.setY(y)
         tempBullet.setVel(10)
         addSpaceObj(tempBullet)
     }
