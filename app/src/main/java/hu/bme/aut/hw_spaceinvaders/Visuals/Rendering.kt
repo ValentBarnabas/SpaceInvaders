@@ -2,7 +2,7 @@ package hu.bme.aut.hw_spaceinvaders.Visuals
 
 import android.content.Context
 import android.graphics.*
-import android.util.Log
+import com.google.android.material.resources.MaterialResources.getDimensionPixelSize
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Player
 import hu.bme.aut.hw_spaceinvaders.GameClasses.SpaceObject
@@ -19,11 +19,15 @@ class Rendering (
     val spriteHeight = 64
     val spriteScale = 86
 
+    private val textPaint : Paint = Paint()
+
     private val background = Background(context)
     private val sprite : Bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.space_invaders_sptire_sheet)
 
     init{
         background.setSize(width, height)
+        //TODO: make it sp somehow
+        textPaint.textSize = 64.0f
     }
 
     fun draw() {
@@ -37,6 +41,7 @@ class Rendering (
                 }
                 drawPlayer(canvas, Game.getPlayer())
             }
+            canvas.drawText("Score: " + Game.getPlayer().getScore(), 10F, textPaint.textSize+10, textPaint)
         } finally {
             if (canvas != null) {
                 view.holder.unlockCanvasAndPost(canvas)
