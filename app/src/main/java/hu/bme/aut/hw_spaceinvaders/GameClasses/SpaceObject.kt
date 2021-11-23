@@ -13,6 +13,8 @@ abstract class SpaceObject () : ISteppable, IDrawable {
         so.CollidedWith(this)
     }
 
+    public abstract fun CheckBounds(width: Int, height: Int, game: Game)
+
     public abstract fun CollidedWith(so: SpaceObject)
 
     override fun Draw(canvas: Canvas) {

@@ -5,11 +5,20 @@ import android.graphics.Canvas
 class PlayerShip() : SpaceObject() {
 
     override val imgIdx: Int = 0
+
     private var vel: Float = 0.0f
     private var shooting: Boolean = false;
 
     override fun CollidedWith(so: SpaceObject) {
         TODO("Not yet implemented")
+    }
+
+    override fun CheckBounds(width: Int, height: Int, game: Game) {
+        if (this.getX() < 0) {
+            this.setX(0.toFloat())
+        } else if (this.getX() > width) {
+            this.setX(width.toFloat())
+        }
     }
 
     override fun Step() {

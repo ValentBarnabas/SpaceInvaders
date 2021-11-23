@@ -21,22 +21,11 @@ object Game {
     fun tick() {
         if(player.isAlive()) {
             player.playerShip.Step()
+            player.playerShip.CheckBounds(width, height, this)
             for (i in spaceObjs.size-1 downTo 0) {
                 var so = spaceObjs[i]
                 so.Step()
-
-                //TODO: check if entity is out of bound, if so, put them back or destroy them
-                if(so.getX() > width) {
-                    so.setX(width.toFloat())
-                } else if (so.getX() < 0) {
-                    so.setX(0.toFloat())
-                } else if (so.getY() > height) {
-                    so.HeightTooMuch(this)
-                    spaceObjs.removeAt(i)
-                } else if (so.getY() < 0) {
-                    so.HeightTooLow(this)
-                    spaceObjs.removeAt(i)
-                }
+                so.CheckBounds(width, height, this)
             }
 
             enemyControl()
@@ -56,6 +45,10 @@ object Game {
 
     private fun addSpaceObj(so : SpaceObject) {
         spaceObjs.add(so)
+    }
+
+    public fun removeSpaceObj(so: SpaceObject) {
+        spaceObjs.remove(so)
     }
 
     fun changeScore(amount : Int) {
