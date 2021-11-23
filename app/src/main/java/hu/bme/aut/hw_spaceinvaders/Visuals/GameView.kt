@@ -35,7 +35,7 @@ class GameView : SurfaceView {
             }
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {
-                while (Game.getRunning() != false) {
+                while (Game.getRunning()) {
                     Game.stopGame()
                 }
             }
