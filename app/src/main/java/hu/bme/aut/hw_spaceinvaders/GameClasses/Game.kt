@@ -30,7 +30,6 @@ object Game {
 
             enemyControl()
         }
-
     }
 
     private fun enemyControl() {
@@ -91,15 +90,17 @@ object Game {
     fun setPlayerVel(vel : Float) {
         player.playerShip.setVel(vel)
     }
+
     fun getRunning() : Boolean {
         return running
     }
+
     fun getPaused() : Boolean {
         return paused
     }
 
     fun stopGame() {
-         running = false
+        running = false
     }
     fun pauseGame() {
         paused = true
@@ -107,6 +108,13 @@ object Game {
     fun unpauseGame(){
         paused = false
     }
+
+    fun gameOver() {
+        pauseGame()
+        //upload score and show end screen
+        stopGame()
+    }
+
     fun setGameController(gc : GameController) {
         gameController = gc
     }

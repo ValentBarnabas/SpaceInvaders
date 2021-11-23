@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.firebase.FirebaseApp
+import hu.bme.aut.hw_spaceinvaders.Data.FirebaseScoreHandler
 import hu.bme.aut.hw_spaceinvaders.databinding.ActivityStartBinding
 
 class StartActivity : AppCompatActivity() {
