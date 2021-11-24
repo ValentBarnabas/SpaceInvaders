@@ -9,8 +9,13 @@ class Bullet() : SpaceObject() {
 
     private var vel: Int = 0
 
-    override fun CollidedWith(so: SpaceObject) {
-        TODO("Not yet implemented")
+    override fun CollideWith(so: SpaceObject) {
+        so.CollidedWithSpec(this)
+    }
+
+    override fun CollidedWithSpec(e: Enemy) {
+        Game.bulletHit(this, e)
+        super.CollidedWithSpec(e)
     }
 
     override fun CheckBounds(width: Int, height: Int, game: Game) {
@@ -19,7 +24,6 @@ class Bullet() : SpaceObject() {
     }
 
     override fun Step() {
-//        TODO("Not yet implemented")
         this.setY(this.getY()-vel)
     }
 

@@ -19,13 +19,27 @@ object Game {
     private var nextEnemyAt : Int = 0
 
     fun tick() {
-        if(player.isAlive()) {
+        if(player.getAlive()) {
             player.playerShip.Step()
             player.playerShip.CheckBounds(width, height, this)
+            player.playerShip.CheckCollision(spaceObjs, gameController.getRendering().spriteWidth, gameController.getRendering().spriteHeight)
+
+//            //TODO: solution for concurrent modification error is to give iterator to collision checker, pass it on untill removing part comes, and then instead of spaceObj.remove() use iterator.remove(iterator)
+//            val soIterator = spaceObjs.iterator()
+//            while (soIterator.hasNext()) {
+//                val curr = soIterator.next()
+//                curr.Step()
+//                curr.CheckBounds(width, height, this)
+//                curr.CheckCollision(spaceObjs, gameController.getRendering().spriteWidth, gameController.getRendering().spriteHeight)
+//            }
             for (i in spaceObjs.size-1 downTo 0) {
-                var so = spaceObjs[i]
-                so.Step()
-                so.CheckBounds(width, height, this)
+                //TODO: remove if changed to iterators
+                if (i < spaceObjs.size) {
+                    var so = spaceObjs[i]
+                    so.Step()
+                    so.CheckBounds(width, height, this)
+                    so.CheckCollision(spaceObjs, gameController.getRendering().spriteWidth, gameController.getRendering().spriteHeight)
+                }
             }
 
             enemyControl()
@@ -51,7 +65,7 @@ object Game {
     }
 
     fun changeScore(amount : Int) {
-        player.setScore(amount)
+        player.changeScore(amount)
     }
 
     fun setSize(width: Int, height: Int){
@@ -113,6 +127,23 @@ object Game {
         pauseGame()
         //upload score and show end screen
         stopGame()
+    }
+
+    fun playerDied() {
+        player.setAlive(false)
+        gameOver()
+    }
+
+    fun enemyDied(e: Enemy, b: Bullet) {
+        Log.i("enemydied", "enemy died called")
+        removeSpaceObj(e)
+        removeSpaceObj(b)
+        player.changeScore(10)
+    }
+
+    fun bulletHit(b: Bullet, e: Enemy) {
+        removeSpaceObj(b)
+        removeSpaceObj(e)
     }
 
     fun setGameController(gc : GameController) {

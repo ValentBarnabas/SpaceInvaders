@@ -1,6 +1,7 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
 import android.graphics.Canvas
+import android.util.Log
 import kotlin.random.Random
 
 class Enemy constructor (x : Float) : SpaceObject() {
@@ -13,18 +14,27 @@ class Enemy constructor (x : Float) : SpaceObject() {
 
     private val vel : Int = Random.nextInt(2,7)
 
-    override fun CollidedWith(so: SpaceObject) {
-        TODO("Not yet implemented")
-    }
-
     override fun CheckBounds(width: Int, height: Int, game: Game) {
         if(this.getY() > height) {
             this.HeightTooMuch(game)
         }
     }
 
+    override fun CollideWith(so: SpaceObject) {
+        so.CollidedWithSpec(this)
+    }
+
+    override fun CollidedWithSpec(b: Bullet) {
+        Game.enemyDied(this, b)
+        super.CollidedWithSpec(b)
+    }
+
+    override fun CollidedWithSpec(ps: PlayerShip) {
+        ps.CollidedWithSpec(this)
+        super.CollidedWithSpec(ps)
+    }
+
     override fun Step() {
-//        TODO("Not yet implemented")
         this.setY(this.getY()+vel)
     }
 

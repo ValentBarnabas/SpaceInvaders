@@ -12,13 +12,17 @@ class Player {
         alive = true
     }
 
-    fun isAlive(): Boolean {
+    fun getAlive(): Boolean {
         return alive
+    }
+
+    fun setAlive(alive: Boolean) {
+        this.alive = alive
     }
     fun getScore() : Int {
         return score;
     }
-    fun setScore(amount : Int) {
+    fun changeScore(amount : Int) {
         score += amount
     }
 

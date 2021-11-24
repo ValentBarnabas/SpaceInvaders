@@ -35,4 +35,21 @@ class FirebaseScoreHandler {
             }
     }
 
+    //TODO: might have to add extra method that calls the original caller with the actual values list
+    //so instead of returning with a list, we call exampleView.setTexts(scoreList) to give out the values after we get them
+//    fun getScores() : MutableList<Scores> {
+//        val scoreList = mutableListOf<Scores>()
+//
+//        val db = Firebase.firestore
+//
+//        db.collection("scores")
+//            .get()
+//            .addOnSuccessListener { result ->
+//                for (temp in result) {
+//                    scoreList.add(Scores(temp.id, temp.data.get("playerName").toString(), temp.data.get("score").toString().toInt()))
+//                }
+//                return scoreList
+//            }
+//    }
+
 }
