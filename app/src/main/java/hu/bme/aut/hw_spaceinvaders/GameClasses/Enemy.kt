@@ -1,7 +1,5 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-import android.graphics.Canvas
-import android.util.Log
 import kotlin.random.Random
 
 class Enemy constructor (x : Float) : SpaceObject() {
@@ -36,10 +34,6 @@ class Enemy constructor (x : Float) : SpaceObject() {
 
     override fun Step() {
         this.setY(this.getY()+vel)
-    }
-
-    override fun Draw(canvas : Canvas) {
-        TODO("Not yet implemented")
     }
 
     override fun HeightTooMuch(game: Game) {

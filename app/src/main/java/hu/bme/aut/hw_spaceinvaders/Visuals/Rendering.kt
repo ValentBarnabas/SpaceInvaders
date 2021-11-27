@@ -50,18 +50,19 @@ class Rendering (
     }
 
     private fun drawPlayer(canvas: Canvas, player: Player) {
+        val od = player.playerShip.getInfo()
         val src = Rect(0,0,spriteWidth-1,spriteHeight-1)
-        val dst = Rect(player.playerShip.getX().toInt(), player.playerShip.getY().toInt(),
-            player.playerShip.getX().toInt()+spriteScale, player.playerShip.getY().toInt()+spriteScale)
+        val dst = Rect(od.x, od.y, od.x + spriteScale, od.y + spriteScale)
         canvas.drawBitmap(sprite, src, dst, null)
     }
     private fun drawSpaceObject(canvas: Canvas, so : SpaceObject) {
-        var src = Rect(0+so.imgIdx%4*spriteWidth,0,spriteWidth-1+so.imgIdx%4*spriteWidth,spriteHeight-1)
-        if(so.imgIdx > 3) {
+        val od = so.getInfo()
+        var src = Rect(0+od.imgIdx%4*spriteWidth,0,spriteWidth-1+od.imgIdx%4*spriteWidth,spriteHeight-1)
+        if(od.imgIdx > 3) {
             src.top += spriteHeight
             src.bottom += spriteHeight
         }
-        val dst = Rect(so.getX().toInt(), so.getY().toInt(), so.getX().toInt()+spriteScale, so.getY().toInt()+spriteScale)
+        val dst = Rect(od.x, od.y, od.x + spriteScale, od.y + spriteScale)
         canvas.drawBitmap(sprite, src, dst, null)
     }
 

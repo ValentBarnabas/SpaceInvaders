@@ -1,8 +1,5 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-import android.graphics.Canvas
-import android.util.Log
-
 class PlayerShip() : SpaceObject() {
 
     override val imgIdx: Int = 0
@@ -32,10 +29,6 @@ class PlayerShip() : SpaceObject() {
             Game.addShot(this.getX(), this.getY())
             shooting = false;
         }
-    }
-
-    override fun Draw(canvas : Canvas) {
-        TODO("Not yet implemented")
     }
 
     fun setVel(vel : Float) {

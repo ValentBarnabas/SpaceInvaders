@@ -27,10 +27,6 @@ class Bullet() : SpaceObject() {
         this.setY(this.getY()-vel)
     }
 
-    override fun Draw(canvas: Canvas) {
-        TODO("Not yet implemented")
-    }
-
     override fun HeightTooLow(game : Game) {
         game.removeSpaceObj(this)
         game.changeScore(-2)

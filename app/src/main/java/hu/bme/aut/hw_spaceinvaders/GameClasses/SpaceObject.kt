@@ -1,15 +1,19 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
 import android.graphics.Canvas
-import android.util.Log
-import hu.bme.aut.hw_spaceinvaders.Visuals.IDrawable
 import hu.bme.aut.hw_spaceinvaders.GameLogic.Collision
+import hu.bme.aut.hw_spaceinvaders.Visuals.IObservable
+import hu.bme.aut.hw_spaceinvaders.Visuals.ObservedData
 
-abstract class SpaceObject () : ISteppable, IDrawable {
+abstract class SpaceObject () : ISteppable, IObservable {
 
     public abstract val imgIdx : Int
     private var x : Float = 0.0f
     private var y : Float = 0.0f
+
+    override fun getInfo() : ObservedData{
+        return ObservedData(x.toInt(), y.toInt(), imgIdx)
+    }
 
     public fun CheckCollision(soList : MutableList<SpaceObject>, width: Int, height: Int) {
         Collision(this, soList, width, height)
@@ -23,13 +27,8 @@ abstract class SpaceObject () : ISteppable, IDrawable {
     public open fun CollidedWithSpec(e: Enemy) {return;}
     public open fun CollidedWithSpec(ps: PlayerShip) {return;}
 
-    override fun Draw(canvas: Canvas) {
-
-    }
-
     public open fun HeightTooMuch(game: Game) { return; }
     public open fun HeightTooLow(game: Game) { return; }
-
 
     fun getX() : Float {
         return x
