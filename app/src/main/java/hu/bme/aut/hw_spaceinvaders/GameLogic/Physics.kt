@@ -6,11 +6,9 @@ import hu.bme.aut.hw_spaceinvaders.GameClasses.SpaceObject
 
 fun Collision(so: SpaceObject, soList: List<SpaceObject>, width: Int, height: Int) {
     for (i in soList.size-1 downTo 0) {
-        //TODO: remove if changed to iterators
-        if (i < soList.size) {
+        if (i < soList.size) {  //needed check because of concurrent modification, simplest solution
             var soTemp = soList[i]
             if(so != soTemp && getBounds(so, width, height).intersect(getBounds(soTemp, width, height))) {
-                Log.i("collision", "collision happened between " + so.javaClass + " and " + soTemp.javaClass + " at: " + so.getX() + ":" + so.getY())
                 so.CollideWith(soTemp)
             }
         }

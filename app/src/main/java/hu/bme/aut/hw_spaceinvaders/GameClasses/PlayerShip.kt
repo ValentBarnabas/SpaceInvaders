@@ -27,7 +27,7 @@ class PlayerShip() : SpaceObject() {
     }
 
     override fun Step() {
-        this.setX(this.getX()+vel)
+        this.setX(this.getX() + vel)
         if(shooting) {
             Game.addShot(this.getX(), this.getY())
             shooting = false;

@@ -5,6 +5,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.util.Log
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game
 import hu.bme.aut.hw_spaceinvaders.Visuals.GameView
 
@@ -47,9 +48,7 @@ class GyroscopeHelper(context: Context) : SensorEventListener {
             SensorManager.getOrientation(rotation, orientation)
 
             val roll = orientation[2] * 1.0f
-
-            val position = roll - -1.0f
-            Game.getPlayer().playerShip.setVel(position)
+            Game.setPlayerVel(roll)
         }
     }
 

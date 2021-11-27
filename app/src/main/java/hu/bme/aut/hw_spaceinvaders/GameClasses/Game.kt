@@ -1,7 +1,9 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
 import android.util.Log
+import hu.bme.aut.hw_spaceinvaders.Data.FirebaseScoreHandler
 import hu.bme.aut.hw_spaceinvaders.GameLogic.GameController
+import java.util.*
 import kotlin.random.Random
 
 object Game {
@@ -12,9 +14,10 @@ object Game {
 
     private var height : Int = 0
     private var width : Int = 0
+    private val speedBoost : Int = 16
 
     private var spaceObjs = mutableListOf<SpaceObject>()
-    private var player : Player = Player()
+    private var player : Player = Player(Calendar.getInstance().time.toString())
 
     private var nextEnemyAt : Int = 0
 
@@ -24,17 +27,8 @@ object Game {
             player.playerShip.CheckBounds(width, height, this)
             player.playerShip.CheckCollision(spaceObjs, gameController.getRendering().spriteWidth, gameController.getRendering().spriteHeight)
 
-//            //TODO: solution for concurrent modification error is to give iterator to collision checker, pass it on untill removing part comes, and then instead of spaceObj.remove() use iterator.remove(iterator)
-//            val soIterator = spaceObjs.iterator()
-//            while (soIterator.hasNext()) {
-//                val curr = soIterator.next()
-//                curr.Step()
-//                curr.CheckBounds(width, height, this)
-//                curr.CheckCollision(spaceObjs, gameController.getRendering().spriteWidth, gameController.getRendering().spriteHeight)
-//            }
             for (i in spaceObjs.size-1 downTo 0) {
-                //TODO: remove if changed to iterators
-                if (i < spaceObjs.size) {
+                if (i < spaceObjs.size) {   //needed check because of concurrent modification, simplest solution
                     var so = spaceObjs[i]
                     so.Step()
                     so.CheckBounds(width, height, this)
@@ -76,10 +70,11 @@ object Game {
     }
 
     fun setup() {
-        player = Player()
-        //TODO: remove magic numbers
-        player.playerShip.setX((width/2-86/2).toFloat())    //width/2 for centering, 86/2 because of sprite scaling and sprite equating to middle
-        player.playerShip.setY((height-86-8).toFloat())     //-86 because of scaling of sprite, -8 to have a little elevation
+        //TODO: remove this and at the top of the game, add naming fragment on view
+        //idea: if newGame is pressed in MainActivity, pop up a window with a textbox to add player name. Only start game after window has been ok-d
+        player = Player(Calendar.getInstance().time.toString())
+        player.playerShip.setX((width/2 - gameController.getRendering().spriteScale/2).toFloat())    //width/2 for centering, spriteScale/2 because of sprite scaling and sprite equating to middle
+        player.playerShip.setY((height- gameController.getRendering().spriteScale-8).toFloat())     //-spriteScale because of scaling of sprite, -8 to have a little elevation
     }
 
     fun playerShooting() {
@@ -102,7 +97,7 @@ object Game {
     }
 
     fun setPlayerVel(vel : Float) {
-        player.playerShip.setVel(vel)
+        player.playerShip.setVel(vel * width / speedBoost)
     }
 
     fun getRunning() : Boolean {
@@ -126,6 +121,8 @@ object Game {
     fun gameOver() {
         pauseGame()
         //upload score and show end screen
+        var fbHandler = FirebaseScoreHandler()
+        fbHandler.newScore(player.getName(), player.getScore())
         stopGame()
     }
 
@@ -135,7 +132,6 @@ object Game {
     }
 
     fun enemyDied(e: Enemy, b: Bullet) {
-        Log.i("enemydied", "enemy died called")
         removeSpaceObj(e)
         removeSpaceObj(b)
         player.changeScore(10)
@@ -151,7 +147,7 @@ object Game {
     }
     fun setRunning(running : Boolean) {
         this.running = running
-        if(running == true) {
+        if(running) {
             gameController.start()
         }
     }

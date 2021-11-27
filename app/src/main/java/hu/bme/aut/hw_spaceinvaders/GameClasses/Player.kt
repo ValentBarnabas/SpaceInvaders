@@ -1,6 +1,6 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-class Player {
+class Player (name : String){
 
     public var playerShip : PlayerShip = PlayerShip()
 
@@ -9,7 +9,8 @@ class Player {
     private var name : String = ""
 
     init {
-        alive = true
+        this.alive = true
+        this.name = name
     }
 
     fun getAlive(): Boolean {
@@ -18,6 +19,10 @@ class Player {
 
     fun setAlive(alive: Boolean) {
         this.alive = alive
+    }
+
+    fun getName() : String {
+        return name;
     }
     fun getScore() : Int {
         return score;
