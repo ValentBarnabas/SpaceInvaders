@@ -67,7 +67,14 @@ object Game {
         this.width = width
     }
 
-    fun setup() {
+    fun setup(playerName : String) {
+        player = Player(playerName)
+        running = true
+        paused = false
+        spaceObjs = mutableListOf<SpaceObject>()
+    }
+
+    fun setPlayerStartingPosition() {
         player.playerShip.setX((width/2 - gameController.getRendering().spriteScale/2).toFloat())    //width/2 for centering, spriteScale/2 because of sprite scaling and sprite equating to middle
         player.playerShip.setY((height- gameController.getRendering().spriteScale-8).toFloat())     //-spriteScale because of scaling of sprite, -8 to have a little elevation
     }
@@ -84,42 +91,20 @@ object Game {
         addSpaceObj(tempBullet)
     }
 
-    fun getSpaceObjectList() : MutableList<SpaceObject> {
-        return spaceObjs
-    }
-    fun getPlayer() : Player {
-        return player
-    }
+    fun setGameController(gc : GameController) { gameController = gc }
+    fun setPlayerVel(vel : Float) { player.playerShip.setVel(vel * width / speedBoost) }
 
-    fun setPlayerVel(vel : Float) {
-        player.playerShip.setVel(vel * width / speedBoost)
-    }
+    fun getSpaceObjectList() : MutableList<SpaceObject> { return spaceObjs }
+    fun getPlayer() : Player { return player }
+    fun getRunning() : Boolean { return running }
+    fun getPaused() : Boolean { return paused }
 
-    fun setPlayerName(playerName : String) {
-        player.setName(playerName)
-    }
+    fun stopGame() { running = false }
+    fun pauseGame() { paused = true }
+    fun unpauseGame(){ paused = false }
 
-    fun getRunning() : Boolean {
-        return running
-    }
-
-    fun getPaused() : Boolean {
-        return paused
-    }
-
-    fun stopGame() {
-        running = false
-    }
-    fun pauseGame() {
-        paused = true
-    }
-    fun unpauseGame(){
-        paused = false
-    }
-
-    fun gameOver() {
+    private fun gameOver() {
         pauseGame()
-        //upload score and show end screen
         var fbHandler = FirebaseScoreHandler()
         fbHandler.newScore(player.getName(), player.getScore())
         stopGame()
@@ -141,9 +126,6 @@ object Game {
         removeSpaceObj(e)
     }
 
-    fun setGameController(gc : GameController) {
-        gameController = gc
-    }
     fun setRunning(running : Boolean) {
         this.running = running
         if(running) {

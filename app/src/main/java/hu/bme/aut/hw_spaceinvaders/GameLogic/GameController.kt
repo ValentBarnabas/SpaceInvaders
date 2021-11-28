@@ -1,7 +1,5 @@
 package hu.bme.aut.hw_spaceinvaders.GameLogic
 
-import android.content.Context
-import android.util.Log
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game
 import hu.bme.aut.hw_spaceinvaders.Visuals.Rendering
 
@@ -16,7 +14,7 @@ class GameController (rendering: Rendering): Thread() {
 
     override fun run() {
         Game.setSize(rendering.getWidth(), rendering.getHeight())
-        Game.setup()
+        Game.setPlayerStartingPosition()
         while(Game.getRunning()) {
             if(!Game.getPaused()) {
                 val start = System.currentTimeMillis()

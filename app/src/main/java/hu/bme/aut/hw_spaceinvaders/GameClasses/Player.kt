@@ -6,7 +6,7 @@ class Player (name : String){
 
     private var alive : Boolean = false
     private var score : Int = 0
-    private var name : String = ""
+    private var name : String = "Anonymous"
 
     init {
         this.alive = true

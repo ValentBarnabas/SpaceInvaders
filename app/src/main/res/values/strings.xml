@@ -5,4 +5,6 @@
     <string name="mainActivity_exit">Exit</string>
     <string name="scoreBoard_titleText">Best scores</string>
     <string name="scoreboard_placeholder">Waiting for data</string>
+    <string name="popupQuitDuringGameplay_tvText">Are sure you want to quit?</string>
+    <string name="popupQuitDuringGameplay_okBtn">Yes</string>
 </resources>

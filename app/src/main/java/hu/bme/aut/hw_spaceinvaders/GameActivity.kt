@@ -3,10 +3,10 @@ package hu.bme.aut.hw_spaceinvaders
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game
 import hu.bme.aut.hw_spaceinvaders.Senzor.GyroscopeHelper
-
-//TODO: implement back button not quitting app, but instead pausing game, and opening popup window. Also, instead of quitting the app, go back to StartActivity
 
 class GameActivity : AppCompatActivity() {
 
@@ -14,7 +14,7 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Game.setPlayerName(intent.getStringExtra("playerName").toString())
+        Game.setup(intent.getStringExtra("playerName").toString())
         setContentView(R.layout.activity_game)
         gyroscopeHelper = GyroscopeHelper(this)
     }
@@ -30,9 +30,23 @@ class GameActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(Game.getRunning()) {
+        if(Game.getRunning() && !Game.getPaused()) {
             Game.pauseGame();
-        } else {
+        } else if (Game.getRunning() && Game.getPaused()) {
+            var dialogBuilder = AlertDialog.Builder(this)
+            val popupView = layoutInflater.inflate(R.layout.popup_quit_during_gameplay, null)
+
+            dialogBuilder.setView(popupView)
+            var dialog = dialogBuilder.create()
+            dialog.show()
+
+            var okBtn = popupView.findViewById<Button>(R.id.popupQuitDuringGameOKBtn)
+            okBtn.setOnClickListener {
+                Game.pauseGame()
+                Game.stopGame()
+                finish()
+            }
+        } else if (!Game.getRunning()) {
             super.onBackPressed()
         }
     }

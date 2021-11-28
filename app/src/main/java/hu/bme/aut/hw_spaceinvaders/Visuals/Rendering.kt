@@ -15,8 +15,8 @@ class Rendering (
     private val width: Int
  ) {
 
-    val spriteWidth = 64
-    val spriteHeight = 64
+    val spriteWidth = 56    //Luca's phone: 56, Mine: 64
+    val spriteHeight = 56
     val spriteScale = 86
 
     private val textPaint : Paint = Paint()
@@ -42,6 +42,13 @@ class Rendering (
                 drawPlayer(canvas, Game.getPlayer())
             }
             canvas.drawText("Score: " + Game.getPlayer().getScore(), 10F, textPaint.textSize+10, textPaint)
+
+            if(!Game.getRunning()) {
+                textPaint.textSize = 128.0f
+                canvas.drawText("Game Over", 16.0f, height/2.toFloat(), textPaint)
+                textPaint.textSize = 64.0f
+                canvas.drawText("Score: " + Game.getPlayer().getScore(), 16.0f, height/2.toFloat()+64, textPaint)
+            }
         } finally {
             if (canvas != null) {
                 view.holder.unlockCanvasAndPost(canvas)
