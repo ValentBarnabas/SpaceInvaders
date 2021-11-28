@@ -16,6 +16,7 @@ class GameController (rendering: Rendering): Thread() {
 
     override fun run() {
         Game.setSize(rendering.getWidth(), rendering.getHeight())
+        Game.setup()
         while(Game.getRunning()) {
             if(!Game.getPaused()) {
                 val start = System.currentTimeMillis()

@@ -24,6 +24,10 @@ class Player (name : String){
     fun getName() : String {
         return name;
     }
+
+    fun setName(playerName : String){
+        this.name = playerName
+    }
     fun getScore() : Int {
         return score;
     }

@@ -14,6 +14,7 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Game.setPlayerName(intent.getStringExtra("playerName").toString())
         setContentView(R.layout.activity_game)
         gyroscopeHelper = GyroscopeHelper(this)
     }

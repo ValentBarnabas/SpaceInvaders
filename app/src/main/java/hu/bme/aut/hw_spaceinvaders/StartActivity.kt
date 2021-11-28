@@ -3,7 +3,11 @@ package hu.bme.aut.hw_spaceinvaders
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.FirebaseApp
 import hu.bme.aut.hw_spaceinvaders.Data.FirebaseScoreHandler
 import hu.bme.aut.hw_spaceinvaders.databinding.ActivityStartBinding
@@ -20,11 +24,27 @@ class StartActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.StartButton.setOnClickListener{
-            var intent = Intent(this@StartActivity, GameActivity::class.java)
 
-            startActivity(intent)
-            finish()
+            var dialogBuilder = AlertDialog.Builder(this)
+            val popupView = layoutInflater.inflate(R.layout.popup_player_name, null)
+
+            dialogBuilder.setView(popupView)
+            var dialog = dialogBuilder.create()
+            dialog.show()
+
+            var okBtn = popupView.findViewById<Button>(R.id.okButton)
+            var playerName = ""
+            okBtn.setOnClickListener {
+                playerName = popupView.findViewById<EditText>(R.id.playerNameET).text.toString()
+                var intent = Intent(this@StartActivity, GameActivity::class.java)
+                intent.putExtra("playerName", playerName)
+                startActivity(intent)
+                dialog.hide()
+//                finish()
+            }
+
         }
+
         binding.ScoreButton.setOnClickListener{
             startActivity(Intent(this@StartActivity, ScoreBoardActivity::class.java))
         }

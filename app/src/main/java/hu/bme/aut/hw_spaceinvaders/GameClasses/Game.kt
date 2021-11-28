@@ -17,7 +17,7 @@ object Game {
     private val speedBoost : Int = 16
 
     private var spaceObjs = mutableListOf<SpaceObject>()
-    private var player : Player = Player(Calendar.getInstance().time.toString())
+    private var player : Player = Player("Anonymous")
 
     private var nextEnemyAt : Int = 0
 
@@ -65,14 +65,9 @@ object Game {
     fun setSize(width: Int, height: Int){
         this.height = height
         this.width = width
-
-        setup()
     }
 
     fun setup() {
-        //TODO: remove this and at the top of the game, add naming fragment on view
-        //idea: if newGame is pressed in MainActivity, pop up a window with a textbox to add player name. Only start game after window has been ok-d
-        player = Player(Calendar.getInstance().time.toString())
         player.playerShip.setX((width/2 - gameController.getRendering().spriteScale/2).toFloat())    //width/2 for centering, spriteScale/2 because of sprite scaling and sprite equating to middle
         player.playerShip.setY((height- gameController.getRendering().spriteScale-8).toFloat())     //-spriteScale because of scaling of sprite, -8 to have a little elevation
     }
@@ -98,6 +93,10 @@ object Game {
 
     fun setPlayerVel(vel : Float) {
         player.playerShip.setVel(vel * width / speedBoost)
+    }
+
+    fun setPlayerName(playerName : String) {
+        player.setName(playerName)
     }
 
     fun getRunning() : Boolean {

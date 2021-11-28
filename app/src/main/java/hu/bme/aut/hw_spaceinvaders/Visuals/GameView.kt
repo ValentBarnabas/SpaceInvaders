@@ -10,7 +10,6 @@ import hu.bme.aut.hw_spaceinvaders.GameLogic.GameController
 
 class GameView : SurfaceView {
 
-    //TODO: check if i can remove any of these
     constructor (context: Context) : super (context)
     constructor (context: Context, attribSet: AttributeSet) : super(context, attribSet)
     constructor (context: Context, attribSet: AttributeSet, defStyleAttr: Int) : super(context, attribSet, defStyleAttr)
