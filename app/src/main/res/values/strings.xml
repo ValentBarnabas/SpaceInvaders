@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HW_SpaceInvaders</string>
+    <string name="mainActivity_scoreBoard">Score Board</string>
+    <string name="mainActivity_startNewGame">Start New Game</string>
+    <string name="mainActivity_exit">Exit</string>
+    <string name="scoreBoard_titleText">Best scores</string>
+    <string name="scoreboard_placeholder">Waiting for data</string>
 </resources>

@@ -6,13 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".StartActivity">
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/TitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MoveToGame"
+        android:text="Space Invaders"
+        android:textAllCaps="true"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/StartButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/StartButton"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:text="@string/mainActivity_startNewGame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/ScoreButton"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:text="@string/mainActivity_scoreBoard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/StartButton" />
+
+    <Button
+        android:id="@+id/ExitButton"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:text="@string/mainActivity_exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

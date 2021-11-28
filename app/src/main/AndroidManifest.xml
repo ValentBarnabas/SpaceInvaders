@@ -10,11 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
+
         <activity
             android:name=".StartActivity"
             android:exported="true"
-            android:theme="@style/Theme.GameInactive"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.GameActive">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,15 +24,21 @@
         </activity>
 
         <activity
+            android:name=".ScoreBoardActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.GameActive"/>
+
+        <activity
             android:name=".GameActivity"
             android:exported="true"
-            android:theme="@style/Theme.GameActive"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.GameActive">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

@@ -7,8 +7,10 @@ import android.widget.Toast
 import com.google.firebase.FirebaseApp
 import hu.bme.aut.hw_spaceinvaders.Data.FirebaseScoreHandler
 import hu.bme.aut.hw_spaceinvaders.databinding.ActivityStartBinding
+import kotlin.system.exitProcess
 
 class StartActivity : AppCompatActivity() {
+
     private lateinit var binding : ActivityStartBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,9 +19,18 @@ class StartActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.button.setOnClickListener{
-            startActivity(Intent(this@StartActivity, GameActivity::class.java))
+        binding.StartButton.setOnClickListener{
+            var intent = Intent(this@StartActivity, GameActivity::class.java)
+
+            startActivity(intent)
             finish()
+        }
+        binding.ScoreButton.setOnClickListener{
+            startActivity(Intent(this@StartActivity, ScoreBoardActivity::class.java))
+        }
+
+        binding.ExitButton.setOnClickListener{
+            exitProcess(-1)
         }
     }
 }

@@ -3,6 +3,8 @@ package hu.bme.aut.hw_spaceinvaders.Data
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import hu.bme.aut.hw_spaceinvaders.ScoreBoardActivity
+import hu.bme.aut.hw_spaceinvaders.databinding.ActivityScoreBoardBinding
 
 class FirebaseScoreHandler {
 
@@ -35,21 +37,20 @@ class FirebaseScoreHandler {
             }
     }
 
-    //TODO: might have to add extra method that calls the original caller with the actual values list
-    //so instead of returning with a list, we call exampleView.setTexts(scoreList) to give out the values after we get them
-//    fun getScores() : MutableList<Scores> {
-//        val scoreList = mutableListOf<Scores>()
-//
-//        val db = Firebase.firestore
-//
-//        db.collection("scores")
-//            .get()
-//            .addOnSuccessListener { result ->
-//                for (temp in result) {
-//                    scoreList.add(Scores(temp.id, temp.data.get("playerName").toString(), temp.data.get("score").toString().toInt()))
-//                }
-//                return scoreList
-//            }
-//    }
+    fun getScores(caller : ScoreBoardActivity) {
+        val scoreList = mutableListOf<Scores>()
+
+        val db = Firebase.firestore
+
+        db.collection("scores")
+            .get()
+            .addOnSuccessListener { result ->
+                for (temp in result) {
+                    scoreList.add(Scores(temp.id, temp.data.get("playerName").toString(), temp.data.get("score").toString().toInt()))
+                }
+
+                caller.receiveScores(scoreList)
+            }
+    }
 
 }
