@@ -2,7 +2,6 @@ package hu.bme.aut.hw_spaceinvaders.Visuals
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game

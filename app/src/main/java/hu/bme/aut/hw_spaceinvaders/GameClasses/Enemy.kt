@@ -12,8 +12,8 @@ class Enemy constructor (x : Float) : SpaceObject() {
 
     private val vel : Int = Random.nextInt(2,7)
 
-    override fun CheckBounds(width: Int, height: Int, game: Game) {
-        if(this.getY() > height) {
+    override fun CheckBounds(width: Int, height: Int, spriteWidth: Int, game: Game) {
+        if(this.getY() > height+spriteWidth) {
             this.HeightTooMuch(game)
         }
     }

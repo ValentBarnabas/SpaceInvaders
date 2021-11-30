@@ -1,12 +1,11 @@
 package hu.bme.aut.hw_spaceinvaders.Visuals
 
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import kotlin.random.Random
 
-class Background (private val context: Context) : IDrawable {
+class Background () : IDrawable {
 
     private var width : Int = 0
     private var height : Int = 0

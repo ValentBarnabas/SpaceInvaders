@@ -31,7 +31,7 @@ class GameActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if(Game.getRunning() && !Game.getPaused()) {
-            Game.pauseGame();
+            Game.pauseGame()
         } else if (Game.getRunning() && Game.getPaused()) {
             var dialogBuilder = AlertDialog.Builder(this)
             val popupView = layoutInflater.inflate(R.layout.popup_quit_during_gameplay, null)
@@ -44,6 +44,7 @@ class GameActivity : AppCompatActivity() {
             okBtn.setOnClickListener {
                 Game.pauseGame()
                 Game.stopGame()
+                dialog.dismiss()
                 finish()
             }
         } else if (!Game.getRunning()) {

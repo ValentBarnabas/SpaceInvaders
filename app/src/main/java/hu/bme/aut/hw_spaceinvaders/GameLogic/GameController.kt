@@ -36,4 +36,16 @@ class GameController (rendering: Rendering): Thread() {
     fun getRendering() : Rendering {
         return rendering
     }
+
+    fun getSpriteWidth() : Int {
+        return rendering.spriteWidth
+    }
+
+    fun getSpriteHeight() : Int {
+        return rendering.spriteHeight
+    }
+
+    fun getSpriteScaling() : Int {
+        return rendering.spriteScale
+    }
 }

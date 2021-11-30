@@ -1,8 +1,8 @@
 package hu.bme.aut.hw_spaceinvaders.Visuals
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
-import com.google.android.material.resources.MaterialResources.getDimensionPixelSize
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Player
 import hu.bme.aut.hw_spaceinvaders.GameClasses.SpaceObject
@@ -15,19 +15,20 @@ class Rendering (
     private val width: Int
  ) {
 
-    val spriteWidth = 56    //Luca's phone: 56, Mine: 64
-    val spriteHeight = 56
+    private val density = Resources.getSystem().displayMetrics.density.toInt()
+
+    val spriteWidth = 64
+    val spriteHeight = 64
     val spriteScale = 86
 
     private val textPaint : Paint = Paint()
 
-    private val background = Background(context)
+    private val background = Background()
     private val sprite : Bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.space_invaders_sptire_sheet)
 
     init{
         background.setSize(width, height)
-        //TODO: make it sp somehow
-        textPaint.textSize = 64.0f
+        textPaint.textSize = 128.0f / density
     }
 
     fun draw() {
@@ -41,13 +42,14 @@ class Rendering (
                 }
                 drawPlayer(canvas, Game.getPlayer())
             }
-            canvas.drawText("Score: " + Game.getPlayer().getScore(), 10F, textPaint.textSize+10, textPaint)
+
+            if(Game.getRunning()) canvas.drawText("Score: " + Game.getPlayer().getScore(), 32.0f / density, textPaint.textSize + (32.0f / density), textPaint)
 
             if(!Game.getRunning()) {
-                textPaint.textSize = 128.0f
-                canvas.drawText("Game Over", 16.0f, height/2.toFloat(), textPaint)
-                textPaint.textSize = 64.0f
-                canvas.drawText("Score: " + Game.getPlayer().getScore(), 16.0f, height/2.toFloat()+64, textPaint)
+                textPaint.textSize = 256.0f / density
+                canvas.drawText("Game Over", 64.0f/density, height/2.toFloat(), textPaint)
+                textPaint.textSize = 128.0f / density
+                canvas.drawText("Score: " + Game.getPlayer().getScore(), 64.0f/density, height/2.toFloat()+128.0f/density, textPaint)
             }
         } finally {
             if (canvas != null) {
@@ -64,7 +66,7 @@ class Rendering (
     }
     private fun drawSpaceObject(canvas: Canvas, so : SpaceObject) {
         val od = so.getInfo()
-        var src = Rect(0+od.imgIdx%4*spriteWidth,0,spriteWidth-1+od.imgIdx%4*spriteWidth,spriteHeight-1)
+        var src = Rect(1+od.imgIdx%4*spriteWidth,0,spriteWidth+od.imgIdx%4*spriteWidth-1, spriteHeight-1)
         if(od.imgIdx > 3) {
             src.top += spriteHeight
             src.bottom += spriteHeight

@@ -1,13 +1,12 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-import android.graphics.Canvas
 import hu.bme.aut.hw_spaceinvaders.GameLogic.Collision
 import hu.bme.aut.hw_spaceinvaders.Visuals.IObservable
 import hu.bme.aut.hw_spaceinvaders.Visuals.ObservedData
 
 abstract class SpaceObject () : ISteppable, IObservable {
 
-    public abstract val imgIdx : Int
+    abstract val imgIdx : Int
     private var x : Float = 0.0f
     private var y : Float = 0.0f
 
@@ -15,26 +14,26 @@ abstract class SpaceObject () : ISteppable, IObservable {
         return ObservedData(x.toInt(), y.toInt(), imgIdx)
     }
 
-    public fun CheckCollision(soList : MutableList<SpaceObject>, width: Int, height: Int) {
+    fun CheckCollision(soList : MutableList<SpaceObject>, width: Int, height: Int) {
         Collision(this, soList, width, height)
     }
 
-    public abstract fun CheckBounds(width: Int, height: Int, game: Game)
+    abstract fun CheckBounds(width: Int, height: Int, spriteWidth: Int, game: Game)
 
-    public abstract fun CollideWith(so : SpaceObject)
+    abstract fun CollideWith(so : SpaceObject)
 
-    public open fun CollidedWithSpec(b: Bullet) {return;}
-    public open fun CollidedWithSpec(e: Enemy) {return;}
-    public open fun CollidedWithSpec(ps: PlayerShip) {return;}
+    open fun CollidedWithSpec(b: Bullet) {return;}
+    open fun CollidedWithSpec(e: Enemy) {return;}
+    open fun CollidedWithSpec(ps: PlayerShip) {return;}
 
-    public open fun HeightTooMuch(game: Game) { return; }
-    public open fun HeightTooLow(game: Game) { return; }
+    open fun HeightTooMuch(game: Game) { return; }
+    open fun HeightTooLow(game: Game) { return; }
 
     fun getX() : Float {
         return x
     }
     fun getY() : Float {
-        return y;
+        return y
     }
 
     fun setX(x : Float) {

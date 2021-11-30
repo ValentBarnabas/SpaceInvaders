@@ -5,9 +5,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.Log
 import hu.bme.aut.hw_spaceinvaders.GameClasses.Game
-import hu.bme.aut.hw_spaceinvaders.Visuals.GameView
 
 class GyroscopeHelper(context: Context) : SensorEventListener {
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager

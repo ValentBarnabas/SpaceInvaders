@@ -2,7 +2,7 @@ package hu.bme.aut.hw_spaceinvaders.GameClasses
 
 class Player (name : String){
 
-    public var playerShip : PlayerShip = PlayerShip()
+    var playerShip : PlayerShip = PlayerShip()
 
     private var alive : Boolean = false
     private var score : Int = 0
@@ -11,6 +11,18 @@ class Player (name : String){
     init {
         this.alive = true
         this.name = name
+    }
+
+    fun setShipX(x: Int) {
+        playerShip.setX(x.toFloat())
+    }
+
+    fun setShipY(y: Int) {
+        playerShip.setY(y.toFloat())
+    }
+
+    fun setShipVel(vel: Float) {
+        playerShip.setVel(vel)
     }
 
     fun getAlive(): Boolean {
@@ -22,20 +34,22 @@ class Player (name : String){
     }
 
     fun getName() : String {
-        return name;
+        return name
     }
 
     fun setName(playerName : String){
         this.name = playerName
     }
+
     fun getScore() : Int {
-        return score;
+        return score
     }
+
     fun changeScore(amount : Int) {
         score += amount
     }
 
     fun setShooting(isShooting: Boolean) {
-        playerShip.setShooting(true)
+        playerShip.setShooting(isShooting)
     }
 }

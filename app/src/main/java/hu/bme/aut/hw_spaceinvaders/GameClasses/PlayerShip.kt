@@ -13,12 +13,12 @@ class PlayerShip() : SpaceObject() {
     }
 
     private var vel: Float = 0.0f
-    private var shooting: Boolean = false;
+    private var shooting: Boolean = false
 
-    override fun CheckBounds(width: Int, height: Int, game: Game) {
+    override fun CheckBounds(width: Int, height: Int, spriteWidth: Int, game: Game) {
         if (this.getX() < 0) {
             this.setX(0.toFloat())
-        } else if (this.getX() > width) {
+        } else if (this.getX() > width-spriteWidth) {
             this.setX(width.toFloat())
         }
     }
@@ -27,7 +27,7 @@ class PlayerShip() : SpaceObject() {
         this.setX(this.getX() + vel)
         if(shooting) {
             Game.addShot(this.getX(), this.getY())
-            shooting = false;
+            shooting = false
         }
     }
 

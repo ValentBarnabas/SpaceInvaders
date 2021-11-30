@@ -1,9 +1,7 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-import android.util.Log
 import hu.bme.aut.hw_spaceinvaders.Data.FirebaseScoreHandler
 import hu.bme.aut.hw_spaceinvaders.GameLogic.GameController
-import java.util.*
 import kotlin.random.Random
 
 object Game {
@@ -14,7 +12,7 @@ object Game {
 
     private var height : Int = 0
     private var width : Int = 0
-    private val speedBoost : Int = 16
+    private const val speedBoost : Int = 16
 
     private var spaceObjs = mutableListOf<SpaceObject>()
     private var player : Player = Player("Anonymous")
@@ -24,15 +22,15 @@ object Game {
     fun tick() {
         if(player.getAlive()) {
             player.playerShip.Step()
-            player.playerShip.CheckBounds(width, height, this)
-            player.playerShip.CheckCollision(spaceObjs, gameController.getRendering().spriteWidth, gameController.getRendering().spriteHeight)
+            player.playerShip.CheckBounds(width, height, gameController.getSpriteWidth(), this)
+            player.playerShip.CheckCollision(spaceObjs, gameController.getSpriteWidth(), gameController.getSpriteHeight())
 
             for (i in spaceObjs.size-1 downTo 0) {
                 if (i < spaceObjs.size) {   //needed check because of concurrent modification, simplest solution
                     var so = spaceObjs[i]
                     so.Step()
-                    so.CheckBounds(width, height, this)
-                    so.CheckCollision(spaceObjs, gameController.getRendering().spriteWidth, gameController.getRendering().spriteHeight)
+                    so.CheckBounds(width, height, gameController.getSpriteWidth(), this)
+                    so.CheckCollision(spaceObjs, gameController.getSpriteWidth(), gameController.getSpriteHeight())
                 }
             }
 
@@ -42,7 +40,7 @@ object Game {
 
     private fun enemyControl() {
         if(nextEnemyAt <= 0) {
-            var newEnemy = (Enemy(Random.nextInt(0, width- gameController.getRendering().spriteScale).toFloat()))
+            var newEnemy = (Enemy(Random.nextInt(0, width - gameController.getSpriteScaling()).toFloat()))
             addSpaceObj(newEnemy)
             nextEnemyAt = Random.nextInt(Math.max(35, (100-player.getScore()/5)))
         }
@@ -54,7 +52,7 @@ object Game {
         spaceObjs.add(so)
     }
 
-    public fun removeSpaceObj(so: SpaceObject) {
+    fun removeSpaceObj(so: SpaceObject) {
         spaceObjs.remove(so)
     }
 
@@ -75,8 +73,8 @@ object Game {
     }
 
     fun setPlayerStartingPosition() {
-        player.playerShip.setX((width/2 - gameController.getRendering().spriteScale/2).toFloat())    //width/2 for centering, spriteScale/2 because of sprite scaling and sprite equating to middle
-        player.playerShip.setY((height- gameController.getRendering().spriteScale-8).toFloat())     //-spriteScale because of scaling of sprite, -8 to have a little elevation
+        player.setShipX(width/2 - gameController.getSpriteScaling()/2)          //width/2 for centering, spriteScale/2 because of sprite scaling and sprite equating to middle
+        player.setShipY(height- gameController.getSpriteScaling()-8)            //-spriteScale because of scaling of sprite, -8 to have a little elevation
     }
 
     fun playerShooting() {
@@ -92,7 +90,7 @@ object Game {
     }
 
     fun setGameController(gc : GameController) { gameController = gc }
-    fun setPlayerVel(vel : Float) { player.playerShip.setVel(vel * width / speedBoost) }
+    fun setPlayerVel(vel : Float) { player.setShipVel(vel * width / speedBoost) }
 
     fun getSpaceObjectList() : MutableList<SpaceObject> { return spaceObjs }
     fun getPlayer() : Player { return player }

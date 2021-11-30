@@ -1,7 +1,6 @@
 package hu.bme.aut.hw_spaceinvaders.GameLogic
 
 import android.graphics.Rect
-import android.util.Log
 import hu.bme.aut.hw_spaceinvaders.GameClasses.SpaceObject
 
 fun Collision(so: SpaceObject, soList: List<SpaceObject>, width: Int, height: Int) {

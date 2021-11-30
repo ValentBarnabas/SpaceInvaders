@@ -1,8 +1,5 @@
 package hu.bme.aut.hw_spaceinvaders.GameClasses
 
-import android.graphics.Canvas
-import android.util.Log
-
 class Bullet() : SpaceObject() {
 
     override val imgIdx: Int = 1
@@ -18,8 +15,8 @@ class Bullet() : SpaceObject() {
         super.CollidedWithSpec(e)
     }
 
-    override fun CheckBounds(width: Int, height: Int, game: Game) {
-        if(this.getY() < 0)
+    override fun CheckBounds(width: Int, height: Int, spriteWidth: Int, game: Game) {
+        if(this.getY() < 0-spriteWidth)
             this.HeightTooLow(game)
     }
 
