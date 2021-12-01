@@ -15,7 +15,7 @@ class Rendering (
     private val width: Int
  ) {
 
-    private val density = Resources.getSystem().displayMetrics.density.toInt()
+    private val density : Float = Resources.getSystem().displayMetrics.density
 
     val spriteWidth = 64
     val spriteHeight = 64
@@ -46,7 +46,7 @@ class Rendering (
             if(Game.getRunning()) canvas.drawText("Score: " + Game.getPlayer().getScore(), 32.0f / density, textPaint.textSize + (32.0f / density), textPaint)
 
             if(!Game.getRunning()) {
-                textPaint.textSize = 256.0f / density
+                textPaint.textSize = 200.0f / density
                 canvas.drawText("Game Over", 64.0f/density, height/2.toFloat(), textPaint)
                 textPaint.textSize = 128.0f / density
                 canvas.drawText("Score: " + Game.getPlayer().getScore(), 64.0f/density, height/2.toFloat()+128.0f/density, textPaint)

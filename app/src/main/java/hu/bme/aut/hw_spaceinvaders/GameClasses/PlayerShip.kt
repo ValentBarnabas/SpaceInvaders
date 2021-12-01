@@ -19,7 +19,7 @@ class PlayerShip() : SpaceObject() {
         if (this.getX() < 0) {
             this.setX(0.toFloat())
         } else if (this.getX() > width-spriteWidth) {
-            this.setX(width.toFloat())
+            this.setX(width.toFloat()-spriteWidth)
         }
     }
 

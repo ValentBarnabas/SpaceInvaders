@@ -22,15 +22,15 @@ object Game {
     fun tick() {
         if(player.getAlive()) {
             player.playerShip.Step()
-            player.playerShip.CheckBounds(width, height, gameController.getSpriteWidth(), this)
-            player.playerShip.CheckCollision(spaceObjs, gameController.getSpriteWidth(), gameController.getSpriteHeight())
+            player.playerShip.CheckBounds(width, height, gameController.getSpriteScaling(), this)
+            player.playerShip.CheckCollision(spaceObjs, gameController.getSpriteScaling(), gameController.getSpriteScaling())
 
             for (i in spaceObjs.size-1 downTo 0) {
                 if (i < spaceObjs.size) {   //needed check because of concurrent modification, simplest solution
                     var so = spaceObjs[i]
                     so.Step()
-                    so.CheckBounds(width, height, gameController.getSpriteWidth(), this)
-                    so.CheckCollision(spaceObjs, gameController.getSpriteWidth(), gameController.getSpriteHeight())
+                    so.CheckBounds(width, height, gameController.getSpriteScaling(), this)
+                    so.CheckCollision(spaceObjs, gameController.getSpriteScaling(), gameController.getSpriteScaling())
                 }
             }
 
