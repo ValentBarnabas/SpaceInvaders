@@ -16,15 +16,17 @@ class Rendering (
  ) {
 
     private val density : Float = Resources.getSystem().displayMetrics.density
-
-    val spriteWidth = 64
-    val spriteHeight = 64
-    val spriteScale = 86
-
     private val textPaint : Paint = Paint()
 
     private val background = Background()
     private val sprite : Bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.space_invaders_sptire_sheet)
+
+    private val cols = 4 //number of sprites in one row
+    private val rows = 2 //number of spite rows
+
+    val spriteWidth = sprite.width / cols
+    val spriteHeight = sprite.height / rows
+    val spriteScale = 86
 
     init{
         background.setSize(width, height)

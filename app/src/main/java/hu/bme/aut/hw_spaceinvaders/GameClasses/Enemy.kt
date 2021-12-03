@@ -10,7 +10,7 @@ class Enemy constructor (x : Float) : SpaceObject() {
 
     override val imgIdx : Int = Random.nextInt(2,8)
 
-    private val vel : Int = Random.nextInt(2,7)
+    private val vel : Int = Random.nextInt(2,9)
 
     override fun CheckBounds(width: Int, height: Int, spriteWidth: Int, game: Game) {
         if(this.getY() > height+spriteWidth) {
