@@ -15,10 +15,6 @@ I had a childhood memory of playing with a similar game on my grandparent's phon
 - Player gains points upon shooting down an enemy, loses some for missing or lettin them through
 - After the game, score is uploaded to remote database, top list is updated if needed
 
-gyroscope
-sprite sheet
-
-
 ## Explored Technologies
 - Activity and Fragment classes
     - displaying different views
