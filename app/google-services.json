@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587960421382",
+    "project_id": "hw-spaceinvaders",
+    "storage_bucket": "hw-spaceinvaders.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587960421382:android:e4d0c55cf78c337b488787",
+        "android_client_info": {
+          "package_name": "hu.bme.aut.hw_spaceinvaders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587960421382-1kr4r31f71cbofbmttte2koub4h05026.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8NLrdkJmEL3WU-dfnZLMCLpooUeoWqOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587960421382-1kr4r31f71cbofbmttte2koub4h05026.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
